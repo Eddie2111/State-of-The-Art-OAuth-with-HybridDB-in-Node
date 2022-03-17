@@ -69,6 +69,8 @@ console.log(req.query);
 const id = req.query.id;
 
 function callback(id){
+  if (!id) id = 1;
+
   const sql = 'SELECT * FROM experiment WHERE id = '+id;
   database.mysqli.query(sql, (err,results) => {
     if(err) throw err;
@@ -93,6 +95,7 @@ function callback(id){
     } // end of getting data as "Else"
 }); //end of query
 }; //end of callback 
+
 callback(id); //(provide id)
 
 });

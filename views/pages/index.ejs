@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+  
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron">
+    <h1>The calendar</h1>
+    <p>Welcome to templating using EJS</p>
+
+    <h2>Variable</h2>
+    <p><%= tagline %></p>
+    <p>My name is <%= name%> and I feel like a terrorist</p>
+    <p>Implemented updates: 
+
+      <% mascots.forEach(function(mascot) { %>
+          <strong><%= mascot.name %></strong>,
+      <% }); %>
+
+    <ul>
+      <% mascots.forEach(function(mascot) { %>
+        <li>
+          <strong><%= mascot.name %></strong>
+           <%= mascot.organization %>,
+          Type or port: <%= mascot.port %>
+        </li>
+      <% }); %>
+    </ul>
+    </p>
+
+    <p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+    <p></p>
+  </div>
+</main>
+
+<footer>
+  <%- include('../partials/footer'); %>
+</footer>
+
+</body>
+</html>

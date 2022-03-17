@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+  
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+<div class="container">
+  <div class="row">
+    <div class="col">
+              <table class="table">
+                <thead>
+                  <tr>
+                    
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Info</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <%# commenting the jquery inside the button for design purpose /id="showTable"/ %>
+                    <td><a href="/database?id=1"><button class="btn btn-primary">
+                      <font color="White">show</font>
+                    </button></a> </td>
+                  </tr>
+                  <tr>
+                    
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td><a href="/database?id=2"><button class="btn btn-primary">
+                      <font color="White">Show</font>
+                    </button></a></td>
+                  </tr>
+                  <tr>
+                    
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td><button id="showTable" class="btn btn-primary">Show</button></td>
+                  </tr>
+                </tbody>
+              </table>
+    </div>
+    <div class="col">
+          <table id = "table1" class="table">
+            <thead>
+              <tr>
+                
+                <th scope="col">Name</th>
+                <th scope="col">Bike</th>
+                <th scope="col">Car</th>
+                <th scope="col">DataTag</th>
+                <th scope="col">Facebook</th>
+                <th scope="col">GymMembership</th>
+                <th scope="col">Rocket</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Twitter</th>
+
+              </tr>
+              <tr>
+
+              </tr>
+
+            </thead>
+            <tbody>
+              <tr>
+
+              </tr>
+
+            
+            </tbody>
+          </table>
+          <ul>
+            <% mascots.forEach(function(mascot) { %>
+              <li>
+                <strong><%= mascot.name %></strong>
+                 <%= mascot.organization %>,
+                Type or port: <%= mascot.port %>
+              </li>
+            <% }); %>
+          </ul>
+          <ul>  
+            <strong> <%= id%> </strong>
+            <strong> <%= name%>  </strong>
+            <strong> <%= userID%>  </strong>
+
+          </ul>
+          
+    </div>
+  </div>
+</div>
+
+
+  </body>
+  
+</html>
+
+<%#/////////// End of File ///////////%>
+
+
+
+
+
+
+<%#
+  <table class="table" id="table1">
+      <thead>
+        <tr>
+          
+          <th scope="col">Name</th>
+          <th scope="col">Bike</th>
+          <th scope="col">Car</th>
+          <th scope="col">DataTag</th>
+          <th scope="col">Facebook</th>
+          <th scope="col">GymMembership</th>
+          <th scope="col">Rocket</th>
+          <th scope="col">Salary</th>
+          <th scope="col">Twitter</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          
+
+        </tr>
+        <tr>
+          
+
+        </tr>
+        <tr>
+          
+
+        </tr>
+      </tbody>
+      </table>
+%>

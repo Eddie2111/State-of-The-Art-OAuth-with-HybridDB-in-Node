@@ -4,18 +4,21 @@ var app       = express();
 var $         = require('jquery')
 var database  = require('./database/db');
 var data      = require('./pages/pages');
-var bodyParser = require('body-parser');
 var session   = require('express-session');
-var cookieParser = require('cookie-parser');
+
+//var bodyParser = require('body-parser');
+//var cookieParser = require('cookie-parser');
+
 // active databases
 
-// database.mongoDatabase();
-// database.mysqlDatabase();
 
 // set the view engine to ejs
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
+
+
+// use res.render to load up an ejs view file
 app.set('view engine', 'ejs');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({ 
   secret: '123456cat',
@@ -23,8 +26,8 @@ app.use(session({
   saveUninitialized: true,
   cookie: { maxAge: 60000 }
 }))
-// database
 
+// database
 
 //let data = {name: req.body.name};
 //  let sql = "INSERT INTO users SET ?";
@@ -34,10 +37,8 @@ app.use(session({
 //  });
 
 
-// use res.render to load up an ejs view file
-
 // index page
-var pagedata = data;
+var pagedata = data; //loads all required page data
 
 app.get('/', function(req, res) {
 
@@ -65,14 +66,24 @@ app.get('/about', function(req, res) {
 //database rendering test
 app.get('/database', function(req, res) {
 const testarray = ['varios', 'varios2', 'varios3'];
-console.log(req.query);
+
 const id = req.query.id;
 
 function callback(id){
-  if (!id) id = 1;
-
-  const sql = 'SELECT * FROM experiment WHERE id = '+id;
-  database.mysqli.query(sql, (err,results) => {
+  if (!id){  // if id is not defined or is null
+    res.render('pages/database',{
+      title:pagedata.database.title,
+      data    : " ",
+      id      : " ",
+      name    : " ",
+      userID  : " ",
+      mascots : pagedata.homepage.mascots, 
+      testarray: testarray
+    });
+  }
+  else{
+    const sql = 'SELECT * FROM experiment WHERE id = '+id;
+    database.mysqli.query(sql, (err,results) => {
     if(err) throw err;
     else{
 
@@ -93,9 +104,10 @@ function callback(id){
     });
 
     } // end of getting data as "Else"
-}); //end of query
+    }); //end of query
+  } // end of else
 }; //end of callback 
-
+database.mongoDatabase();
 callback(id); //(provide id)
 
 });

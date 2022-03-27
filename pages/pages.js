@@ -22,6 +22,10 @@ function output(){
   var experiment={
     title:"Experiment"
   }
+  var form = {
+    title:"form on mysql"
+  }
+    
   return {homepage,about,database,calender,experiment};
 };
 module.exports = output();

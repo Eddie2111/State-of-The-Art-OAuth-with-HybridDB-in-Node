@@ -26,6 +26,6 @@ function output(){
     title:"form on mysql"
   }
     
-  return {homepage,about,database,calender,experiment};
+  return {homepage,about,database,calender,experiment,form};
 };
 module.exports = output();

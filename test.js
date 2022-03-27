@@ -5,6 +5,7 @@ var $         = require('jquery')
 var database  = require('./database/db');
 var data      = require('./pages/pages');
 var session   = require('express-session');
+var multar    = require('mutlar');
 
 //var bodyParser = require('body-parser');
 //var cookieParser = require('cookie-parser');
@@ -116,6 +117,22 @@ callback(id); //(provide id)
 // experiment page
 app.get('/experiment', function(req, res) {
   res.render('pages/experiment',{title:pagedata.experiment.title});
+});
+
+app.get('/form', function(req,res){
+    //const sql = 'SELECT * FROM experiment WHERE id = '+id;
+    const sql ="SELECT * FROM experiment WHERE name LIKE '%"+id+"%'";
+    database.mysqli.query(sql, (err,results) => {
+    if(err) throw err;
+    else{
+
+    const result = {
+        name     : results[0].name,
+        userID   : results[0].userID,
+        id       : results[0].id
+    }
+  
+  res.render('pages/form'){title:pagedata.form.title});
 });
 
 // connection created

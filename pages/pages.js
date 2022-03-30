@@ -22,10 +22,12 @@ function output(){
   var experiment={
     title:"Experiment"
   }
-  var form = {
-    title:"form on mysql"
+  var form={
+    title:"form"
   }
-    
-  return {homepage,about,database,calender,experiment,form};
+  var prac1={
+    title:"prac1"
+  }
+  return {homepage,about,database,calender,experiment,form,prac1};
 };
 module.exports = output();

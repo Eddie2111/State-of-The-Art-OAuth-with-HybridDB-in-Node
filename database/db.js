@@ -1,4 +1,4 @@
-const User      = require('./user');
+//const User      = require('./user');
 const mongoose  = require('mongoose');
 const mysql     = require('mysql');
 
@@ -15,7 +15,7 @@ const mysqli = mysql.createConnection({
 var url = "mongodb://localhost:27017/practicedb";
 mongoose.connect(url, (e)=>{
     if (e) {
-        console.log("Problems encountered while connecting to MongoDB");
+        console.log("Problems encountered while connecting to MongoDB"+e.message);
     }
     else{
     console.log("MongoDB Connected!");
@@ -23,19 +23,25 @@ mongoose.connect(url, (e)=>{
 
 });
 
+/// created for mongoose and future use
+
 const userSchema = new mongoose.Schema({
     name: String,
     age: Number,
     email: String
 });
-run();
+
+/// created for mongoose and future use
+
+//run();
 async function run(){
     const user = new User({
+        userID: "user_0001",
         name: 'John',
         email: 'test@testmail.com',
-        password: 'test'
+        age: 21
     });
-await user.save().then(()=>console.log("User saved!")).catch((e)=>console.log(e));
+await user.save().then(()=>console.log("User saved!")).catch((e)=>console.log(e.message));
 console.log(user);
 
 }

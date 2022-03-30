@@ -5,17 +5,20 @@ var $         = require('jquery')
 var database  = require('./database/db');
 var data      = require('./pages/pages');
 var session   = require('express-session');
-var multar    = require('mutlar');
-
 //var bodyParser = require('body-parser');
+//const { urlencoded } = require('body-parser');
+
 //var cookieParser = require('cookie-parser');
 
 // active databases
 
+//active body parsing for post requests
+app.use(express.urlencoded({extended: true}));
+app.use(express.json())
+
 
 // set the view engine to ejs
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: true }));
+
 
 
 // use res.render to load up an ejs view file
@@ -108,7 +111,7 @@ function callback(id){
     }); //end of query
   } // end of else
 }; //end of callback 
-database.mongoDatabase();
+//database.mongoDatabase();
 callback(id); //(provide id)
 
 });
@@ -119,21 +122,73 @@ app.get('/experiment', function(req, res) {
   res.render('pages/experiment',{title:pagedata.experiment.title});
 });
 
-app.get('/form', function(req,res){
-    //const sql = 'SELECT * FROM experiment WHERE id = '+id;
-    const sql ="SELECT * FROM experiment WHERE name LIKE '%"+id+"%'";
-    database.mysqli.query(sql, (err,results) => {
-    if(err) throw err;
-    else{
-
-    const result = {
-        name     : results[0].name,
-        userID   : results[0].userID,
-        id       : results[0].id
-    }
-  
-  res.render('pages/form'){title:pagedata.form.title});
+// form pages
+app.get('/form', function(req, res) {
+  const searchTemplate= " ";
+  res.render('pages/form',{
+    title:pagedata.form.title,
+    keyword:"",
+    products:[],
+    searchedFor:searchTemplate,
+  });
 });
+
+
+app.post('/form', function(req, res) {
+  var postData = req.body;
+  var searchTemplate = "you searched for ''"+postData.name+"''.";
+//mysql query run test
+  const sql = "SELECT * FROM `table2` WHERE description LIKE '%"+postData.name+"%'";
+  database.mysqli.query(sql, (err,results) => {
+if(err){
+  console.log(err.message);
+} 
+console.log(results);
+res.render('pages/form',{
+  title:pagedata.form.title,
+  searchedFor:searchTemplate,
+  products:results,
+});
+}); //end of query
+//mysql query run test
+  //console.log(postData); check if postData is working
+});
+
+app.get("/prac1", function(req,res){
+  var searchtemplate = "Type in the box and click submit to render data";  
+  res.render('pages/prac1',
+  {title:pagedata.prac1.title,
+  searchedFor:searchtemplate,}
+  );
+});
+app.post("/prac1",function(req,res){
+  var data = req.body;
+  var searchtemplate = "you searched for "+data.keyword+".";
+  const sql = "SELECT * FROM `table1` WHERE Department LIKE '% "+data.keyword+ "%' ";
+  database.mysqli.query(sql,(err,results)=>{
+    if (err){
+      console.log(err.message);
+    }
+    console.log(results);
+  res.render('pages/prac1',
+  {title:pagedata.prac1.title,
+  searchedFor:searchtemplate,
+});
+});
+})
+
+
+
+//example post request
+app.post("/yourpath", (req, res)=>{
+
+  //var postData = req.body;
+  //Or if this doesn't work
+  var postData = JSON.parse(req.body);
+  console.log(postData);
+});
+
+
 
 // connection created
 app.listen(3000,()=>{

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+  
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron">
+
+      <center>
+    <form id="contact-form" action="/form" method="POST">
+        <label> Keyword to search</label>
+        <input type="text" name="name"  />  <br />
+        <input type="submit" value="Submit" /> 
+      </form>
+      </center>
+      <p><%= searchedFor%></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(function(product) { %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.description %></td>
+          <td><%= product.price %></td>
+          <td><%= product.pic %></td>
+        </tr>
+        <% }); %>
+      </tbody>
+</html> 

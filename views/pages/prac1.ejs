@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head'); %>
+  
+</head>
+<body class="container">
+
+<header>
+  <%- include('../partials/header'); %>
+</header>
+
+<main>
+  <div class="jumbotron">
+
+      <center>
+    <form id="form" action="/prac1" method="post">
+        <label> Keyword to search</label>
+        <input type="text" name="keyword"  />  <br />
+        <input type="submit" value="Submit" /> 
+      </form>
+      </center>
+      <p><%=searchedFor%></p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Image</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+</html> 

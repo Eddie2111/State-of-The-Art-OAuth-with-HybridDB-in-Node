@@ -5,9 +5,10 @@ var $         = require('jquery')
 var database  = require('./database/db');
 var data      = require('./pages/pages');
 var session   = require('express-session');
-//var bodyParser = require('body-parser');
-//const { urlencoded } = require('body-parser');
+var jwt       = require("./controller/jwt");
+var bodyParser = require('body-parser');
 
+//const { urlencoded } = require('body-parser');
 //var cookieParser = require('cookie-parser');
 
 // active databases
